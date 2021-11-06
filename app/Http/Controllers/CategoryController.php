@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
+use Auth;
+use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
@@ -24,7 +27,23 @@ class CategoryController extends Controller
             ]
         );
 
-        /* $category = Category::create();
-         return view('admin.category.index');*/
+        /*Category::insert([
+            'category_name' => $request->category_name,
+            'user_id' => Auth::user()->id,
+            'created_at' => Carbon::now(),
+        ]);
+
+        $data = array();
+        $data['category_name'] = $request->category_name;
+        $data['user_id'] = Auth::user()->id;
+        DB::table('categories')->insert($data);*/
+
+        $category = new Category;
+        $category->category_name = $request->category_name;
+        $category->user_id = Auth::user()->id;
+        $category->save();
+
+        return Redirect()->back()->with('success', 'Category Inserted Successfully');
+
     }
 }
