@@ -23,3 +23,4 @@ Route::get('/category/all', [CategoryController::class, 'AllCat'])->name('all.ca
 Route::post('/category/add', [CategoryController::class, 'AddCat'])->name('store.category');
 Route::get('/category/edit/{id}', [CategoryController::class, 'EditCat'])->name('edit.category');
 Route::post('/category/update/{id}', [CategoryController::class, 'UpdateCat'])->name('update.category');
+Route::get('/category/softdelete/{id}', [CategoryController::class, 'SoftDeleteCat'])->name('softdelete.category');
