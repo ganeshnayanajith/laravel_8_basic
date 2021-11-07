@@ -29,25 +29,44 @@
                             <thead>
                             <tr>
                                 <th scope="col">No</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Email</th>
+                                <th scope="col">Category Name</th>
+                                <th scope="col">User</th>
                                 <th scope="col">Created At</th>
+                                <th scope="col">Action</th>
                             </tr>
                             </thead>
                             <tbody>
 
+                            {{--                            @php($i=1)--}}
+                            @foreach($categories as $category)
 
-                            <tr>
-                                <th scope="row"></th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <tr>
+                                    <th scope="row">{{ $categories->firstItem()+$loop->index }}</th>
+                                    <td>{{ $category->category_name }}</td>
+                                    {{--                                    <td>{{ $category->user_id }}</td>--}}
+                                    <td>{{ $category->user->name }}</td>
+                                    {{--                                    <td>{{ $category->name }}</td>--}}
+                                    <td>
+                                        @if( $category->created_at===NULL)
+                                            <span class="text-danger">No Date Set</span>
+                                        @else
+                                            {{--                                            {{ $category->created_at->diffForHumans() }}--}}
+                                            {{ Carbon\Carbon::parse($category->created_at)->diffForHumans() }}
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a href="{{ url('category/edit/'.$category->id) }}"
+                                           class="btn btn-info">Edit</a>
+                                        <a href="" class="btn btn-danger">Delete</a>
+                                    </td>
+                                </tr>
 
-                            </tr>
-
+                            @endforeach
 
                             </tbody>
                         </table>
+
+                        {{ $categories->links() }}
 
                     </div>
                 </div>
