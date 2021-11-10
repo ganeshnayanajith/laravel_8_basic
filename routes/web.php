@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\BrandController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -26,3 +27,5 @@ Route::post('/category/update/{id}', [CategoryController::class, 'UpdateCat'])->
 Route::get('/category/softdelete/{id}', [CategoryController::class, 'SoftDeleteCat'])->name('softdelete.category');
 Route::get('/category/restore/{id}', [CategoryController::class, 'RestoreCat'])->name('restore.category');
 Route::get('/category/permanent/{id}', [CategoryController::class, 'PermanentDeleteCat'])->name('permanent.category');
+
+Route::get('/brand/all', [BrandController::class, 'AllBrand'])->name('all.brand');
